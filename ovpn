@@ -1,0 +1,44 @@
+#!/bin/bash
+cd /root/.vpn
+echo "||==========================================================||"
+echo "||=====                   ovpn v1.0                    =====||"
+echo "||==========================================================||"
+echo "##############################################################"
+echo "#######                Escolha uma opção               #######"
+echo "#######        (1) ESTADOS UNIDOS || (2) CANADA        #######"
+echo "#######                  (3) EUROPA                    #######"
+echo "#######      (0) Sair    ||   (00) ATUALIZAR SENHA     #######"
+echo "##############################################################"
+echo ""
+echo ""
+echo ""
+echo "Opção:"
+read opc
+case $opc in
+0)
+  exit
+;;
+00)
+echo "vá para esse link para copiar a senha:"
+echo "http://www.vpnbook.com/freevpn"
+echo "cole a senha aqui:"
+read s
+echo "USER: vpnbook" > /root/.vpn/pass.txt
+echo "PASSWORD: $s" >> /root/.vpn/pass.txt
+echo "Senha atualizada!"
+;;
+1)
+cat /root/.vpn/pass.txt
+openvpn vpnbook-us1-tcp443.ovpn
+;;
+2)
+cat /root/.vpn/pass.txt
+openvpn vpnbook-ca1-tcp443.ovpn
+;;
+3)
+cat /root/.vpn/pass.txt
+openvpn vpnbook-euro1-tcp443.ovpn
+;;
+*)
+echo "Comando inválido!!!"
+esac
